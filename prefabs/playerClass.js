@@ -8,6 +8,7 @@ class Player extends Phaser.Physics.Arcade.Sprite
 
         this.sprite = scene.physics.add.sprite(x, y, 'player').setCollideWorldBounds(true);
         this.sprite.body.immovable = true;
+        
         //parse collisions for player from main, tiles / enemy etc
         scene.physics.add.collider(this.sprite, c1);
         scene.physics.add.collider(this.sprite, c2);
@@ -23,9 +24,6 @@ class Player extends Phaser.Physics.Arcade.Sprite
             this.sprite.setVelocityX(-150);
             this.sprite.setFlipX(true);
 
-            //test - fix weird collision from flipping?
-            //this.sprite.body.offset.x = -16;
-            
             if(this.sprite.body.blocked.down)
             {
                this.sprite.play('walk', true); 
@@ -36,9 +34,6 @@ class Player extends Phaser.Physics.Arcade.Sprite
         {
             this.sprite.setVelocityX(150);
             this.sprite.setFlipX(false);
-
-            //test - fix weird collision from flipping?
-            //this.sprite.body.offset.x = 0;
 
             if(this.sprite.body.blocked.down)
             {
