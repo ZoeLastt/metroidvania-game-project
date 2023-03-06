@@ -2,21 +2,18 @@ let switchState;
 let can;
 class Player extends Phaser.Physics.Arcade.Sprite
 {
-    constructor(scene, x, y, c1, c2, c3, enemy)
+    constructor(scene, x, y, c1, cam)
     {
         super(scene, x, y);
         scene.add.existing(this);
         this.scene = scene; 
 
+        //create sprite and set collisions
         this.sprite = scene.physics.add.sprite(x, y, 'player').setCollideWorldBounds(true);
-        
-        //parse collisions for player from main, tiles / enemy etc
         scene.physics.add.collider(this.sprite, c1);
-        scene.physics.add.collider(this.sprite, c2);
-        scene.physics.add.collider(this.sprite, c3);
 
-        //not working for enemy or fruit group 
-        scene.physics.add.collider(this.sprite, enemy);
+        //make camera follow our player
+        cam.startFollow(this.sprite, true, 0.05, -200, 120);
     }
 
     update(input)
@@ -55,31 +52,10 @@ class Player extends Phaser.Physics.Arcade.Sprite
             } 
         }
 
-        //jump mechanics && unpolished wall jump mechanic
+        //jump mechanics
         if(input.jump.isDown && this.sprite.body.blocked.down )
         {
             this.sprite.setVelocityY(-300);    
-        }
-        else if(input.jump.isDown && !this.sprite.body.blocked.down)
-        {
-            if(!switchState)
-            {
-                if(this.sprite.body.blocked.left)
-                {
-                    this.sprite.setVelocityY(-300);
-                    switchState = true;
-                }
-                else if(this.sprite.body.blocked.right)
-                {
-                    this.sprite.setVelocityY(-300);
-                    switchState = true;
-                }
-                
-            }
-        }
-        if(input.jump.isUp)
-        {
-            switchState = false;
         }
 
         //set player jump animations depending on if falling down or moving up (jump)

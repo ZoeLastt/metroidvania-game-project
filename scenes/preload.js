@@ -14,7 +14,7 @@ class preload_scene extends Phaser.Scene
         this.load.image('terrainTiles', './assets/images/Terrain (16x16).png');
         this.load.image('scrollingBg', './assets/images/scrollbg.png');
 
-        this.load.tilemapTiledJSON('map', './assets/maps/testmap.json'); 
+        this.load.tilemapTiledJSON('map', './assets/maps/speedMap.json'); 
     }
 
     create()

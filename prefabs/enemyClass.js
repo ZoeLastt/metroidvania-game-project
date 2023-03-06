@@ -1,6 +1,6 @@
 class Enemy extends Phaser.Physics.Arcade.Sprite
 {
-    constructor(scene, x, y, c1, c2)
+    constructor(scene, x, y, c1)
     {
         super(scene, x, y);
         scene.add.existing(this);
@@ -11,7 +11,6 @@ class Enemy extends Phaser.Physics.Arcade.Sprite
 
         //set world collisions
         scene.physics.add.collider(this.sprite, c1);
-        scene.physics.add.collider(this.sprite, c2);
 
         //play walk animation - to be expanded on when new events are added 
         this.sprite.play({key: 'enemyWalk', repeat: -1});
@@ -37,8 +36,5 @@ class Enemy extends Phaser.Physics.Arcade.Sprite
             this.sprite.setFlipX(false);
         }
     }
-
     //to add - player collision + smarter movement - jump up platforms etc
-
-
 }
